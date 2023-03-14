@@ -26,12 +26,16 @@ export const getStaticPaths: GetStaticPaths<ProductPageParams> = async () => {
 export const getStaticProps: GetStaticProps<
   ProductPageProps,
   ProductPageParams
-> = async ({ params: { id} }) => {
+> = async ({ params}) => {
+  const id = params?.id;
+  if (!id) {
+    throw new Error('id not set');
+  }
   try {
     const product = await getProduct(id);
     return {
       props: { product },
-      revalidate: 30, // seconds
+      revalidate: parseInt(process.env.REVALIDATE_SECONDS!),
     };
   } catch (err) {
     if (err instanceof ApiError && err.status === 404) {
