@@ -1,4 +1,4 @@
-import { GetStaticProps } from 'next';
+import { GetStaticProps } from 'next'; 
 import Head from 'next/head';
 import Title from '../components/Title';
 import { getProducts, Product } from '../lib/products';

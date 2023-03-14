@@ -1,16 +1,24 @@
-// Option 1a: fetch products on the server side (in getStaticProps)
-
+// Option 1b: fetch products on the server side (in getStaticProps)
+// but with Incremental Static Regeneration (in getStaticProps)
+import { GetStaticProps } from 'next';
 import Head from 'next/head';
-import { useEffect, useState } from 'react';
 import Title from '../components/Title';
 import { getProducts, Product } from '../lib/products';
 
-const HomePage: React.FC = () => {
-  const [products, setProducts] = useState<Product[]>([]);
-  useEffect(() => {
-    getProducts().then(setProducts);
-  }, []);
+interface HomePageProps {
+  products: Product[];
+}
 
+export const getStaticProps: GetStaticProps<HomePageProps> = async () => {
+  console.log('[HomePage] getStaticProps()');
+  const products = await getProducts();
+  return {
+    props: { products },
+    revalidate: 30, // seconds
+  };
+};
+
+const HomePage: React.FC<HomePageProps> = ({ products }) => {
   console.log('[HomePage] render:', products);
   return (
     <>
