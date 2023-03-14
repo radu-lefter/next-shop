@@ -25,19 +25,15 @@ export const getStaticPaths: GetStaticPaths<ProductPageParams> = async () => {
 export const getStaticProps: GetStaticProps<
   ProductPageProps,
   ProductPageParams
-> = async ({ params }) => {
-  const id = params?.id;
-  if (!id) {
-    throw new Error('id not set');
-  }
+> = async ({ params: { id} }) => {
   try {
     const product = await getProduct(id);
     return {
       props: { product },
-      revalidate: 5 * 60, // seconds
+      revalidate: 30, // seconds
     };
-  } catch {
-    throw new Error('id not set');
+  } catch (err) {
+    return { notFound: true };
   }
 };
 
