@@ -34,6 +34,7 @@ export const getStaticProps: GetStaticProps<
     const product = await getProduct(id);
     return {
       props: { product },
+      revalidate: 5 * 60, // seconds
     };
   } catch {
     throw new Error('id not set');
