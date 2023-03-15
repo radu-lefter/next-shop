@@ -21,7 +21,7 @@ export interface Product {
   }
 
   export async function getProduct(id: string): Promise<Product> {
-    const product = await fetchJson(`${CMS_URL}/products/${id}`);
+    const product = await fetchJson(`${CMS_URL}/products/${id}?populate=*`);
     return stripProduct(product.data);
   }
   

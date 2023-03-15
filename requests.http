@@ -3,6 +3,6 @@
 GET http://localhost:1337/api/products?populate=*
 
 #get single product
-GET http://localhost:1337/api/products/1
+GET http://localhost:1337/api/products/1?populate=*
 
 GET http://localhost:1337/api/uploads/cucumber.jpg
