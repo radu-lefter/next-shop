@@ -5,6 +5,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import Title from '../components/Title';
 import { getProducts, Product } from '../lib/products';
+import ProductCard from '../components/ProductCard';
 
 interface HomePageProps {
   products: Product[];
@@ -31,9 +32,7 @@ const HomePage: React.FC<HomePageProps> = ({ products }) => {
         <ul>
           {products.map((product) => (
             <li key={product.id}>
-              <Link href={`/products/${product.id}`}>
-                {product.title}
-              </Link>
+              <ProductCard product={product} />
             </li>
           ))}
         </ul>

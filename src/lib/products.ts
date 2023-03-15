@@ -6,6 +6,7 @@ export interface Product {
     id: number;
     title: string;
     description: string;
+    price: string;
   }
   
   function stripProduct(product: any): Product {
@@ -13,6 +14,7 @@ export interface Product {
       id: product.id,
       title: product.attributes.title,
       description: product.attributes.description,
+      price: '£' + product.attributes.price.toFixed(2),
     };
   }
 
