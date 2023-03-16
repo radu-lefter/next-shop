@@ -3,14 +3,20 @@ import Page from '../components/Page';
 import Button from '../components/Button';
 import Field from '../components/Field';
 import Input from '../components/Input';
+import { fetchJson } from '../lib/api';
 
 const SignInPage: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSubmit: FormEventHandler<HTMLFormElement> = (event) => {
+  const handleSubmit: FormEventHandler<HTMLFormElement> = async (event) => {
     event.preventDefault();
-    console.log('should submit:', { email, password });
+    const response = await fetchJson('http://127.0.0.1:1337/api/auth/local', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ identifier: email, password }),
+    });
+    console.log('sign in:', response);
   };
 
   return (
