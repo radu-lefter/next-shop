@@ -21,7 +21,7 @@ export const getStaticProps: GetStaticProps<HomePageProps> = async () => {
 const HomePage: React.FC<HomePageProps> = ({ products }) => {
   console.log('[HomePage] render:', products);
   return (
-    <Page title="Vegetables">
+    <Page title="Jane Austen Books">
       <ul className="grid grid-cols-1 lg:grid-cols-3 gap-4">
         {products.map((product) => (
           <li key={product.id}>

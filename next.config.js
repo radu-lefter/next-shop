@@ -3,7 +3,7 @@ const nextConfig = {
   reactStrictMode: true,
   images: {
     protocol: 'http',
-    domains: ['localhost'],
+    domains: ['127.0.0.1'],
   },
 }
 

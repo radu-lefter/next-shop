@@ -2,7 +2,41 @@
 #get all products
 GET http://localhost:1337/api/products?populate=*
 
+###
 #get single product
 GET http://localhost:1337/api/products/1?populate=*
 
-GET http://localhost:1337/api/uploads/cucumber.jpg
+###
+
+GET http://localhost:1337/api/uploads/pride_af176d2ba4.jpg
+
+###
+
+POST http://localhost:1337/api/auth/local
+Content-Type: application/json
+
+{
+    "identifier": "mihaela@example.com",
+    "password": "Havefun1!"
+}
+
+###
+
+GET http://localhost:1337/cart-items
+Authorization: Bearer
+
+
+###
+
+GET http://localhost:1337/users/me
+
+###
+
+POST http://localhost:1337/api/auth/local/register
+Content-Type: application/json
+
+{
+    "username": "Mihai",
+    "identifier": "mihai@example.com",
+    "password": "Havefun1!"
+}
