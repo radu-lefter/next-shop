@@ -22,8 +22,8 @@ Content-Type: application/json
 
 ###
 
-GET http://localhost:1337/cart-items
-Authorization: Bearer
+GET http://localhost:1337/api/cart-items?populate=*
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjc5OTM4MzI2LCJleHAiOjE2ODI1MzAzMjZ9.0L5YBMdnj49E8BALDf6OdeR1bGi61jWNINm8cU_bHzA
 
 
 ###
