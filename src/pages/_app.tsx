@@ -1,8 +1,15 @@
-import '@/styles/globals.css'
-import type { AppProps } from 'next/app'
+import "@/styles/globals.css";
+import type { AppProps } from "next/app";
+import { QueryClient, QueryClientProvider } from "react-query";
 
-const  App: React.FC<AppProps> =({ Component, pageProps }: AppProps) => {
-  return <Component {...pageProps} />
-}
+const queryClient = new QueryClient();
+
+const App: React.FC<AppProps> = ({ Component, pageProps }: AppProps) => {
+  return (
+    <QueryClientProvider client={queryClient}>
+      <Component {...pageProps} />
+    </QueryClientProvider>
+  );
+};
 
 export default App;
