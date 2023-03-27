@@ -1,17 +1,19 @@
 import { FormEventHandler, useState } from "react";
-import { useMutation } from 'react-query';
+import { useMutation, useQueryClient } from 'react-query';
 import Page from "../components/Page";
 import Button from "../components/Button";
 import Field from "../components/Field";
 import Input from "../components/Input";
 import { fetchJson } from "../lib/api";
 import { useRouter } from 'next/router';
+import { User } from '../lib/user';
 
 const SignInPage: React.FC = () => {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const mutation = useMutation(() => fetchJson('/api/login', {
+  const queryClient = useQueryClient();
+  const mutation = useMutation<User>(() => fetchJson('/api/login', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ email, password }),
@@ -22,6 +24,7 @@ const SignInPage: React.FC = () => {
     
     try {
       const user = await mutation.mutateAsync();
+      queryClient.setQueryData('user', user);
       console.log('signed in:', user);
       router.push('/');
     } catch (err) {
