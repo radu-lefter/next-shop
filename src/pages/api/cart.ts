@@ -12,7 +12,7 @@ function stripCartItem(cartItem: any): CartItem {
       title: cartItem.attributes.products.data[0].attributes.title,
       price: cartItem.attributes.products.data[0].attributes.price,
     },
-    quantity: cartItem.quantity,
+    quantity: cartItem.attributes.Quantity,
   };
 }
 
@@ -23,10 +23,11 @@ const handleCart: NextApiHandler<CartItem[]> = async (req, res) => {
     return;
   }
   try {
-    const cartItems = await fetchJson(`${CMS_URL}/cart-items`, {
+    const cartItems = await fetchJson(`${CMS_URL}/cart-items?populate=*`, {
       headers: { 'Authorization': `Bearer ${jwt}` },
     });
-    res.status(200).json(cartItems.map(stripCartItem));
+    res.status(200).json(cartItems.data.map(stripCartItem));
+    //res.status(200).json(cartItems.data);
   } catch (err) {
     res.status(401).end();
   }
